@@ -47,12 +47,29 @@ function applyInfo(info){
   ZXS.info=info;lsSet("zx.info",info);
   window.__outdated=verCmp(ZXCFG.version,info.minimum)<0;
   updateBadge();
+  checkForce();
+}
+// App older than info.json "minimum": nothing else can be used until it is updated (shown above the intro too).
+function checkForce(){
+  const el=document.getElementById("forceUpdate"),info=ZXS.info;
+  if(!el)return;
+  if(!info||verCmp(ZXCFG.version,info.minimum)>=0){el.style.display="none";return}
+  document.getElementById("fuText").textContent="เวอร์ชันของคุณ ("+ZXCFG.version+") เก่าเกินไป ต้องอัปเดตเป็น "+(info.latest||info.minimum)+" ก่อนจึงจะเล่นต่อได้";
+  const b=document.getElementById("fuBtn");
+  if(window.ZHESS_APP){
+    b.textContent=info.downloadUrl?"ดาวน์โหลดอัปเดต":"ยังไม่มีลิงก์ดาวน์โหลด";
+    b.disabled=!info.downloadUrl;
+    b.onclick=()=>openUrl(info.downloadUrl);
+  }else{
+    b.textContent="รีเฟรชเพื่ออัปเดต";b.disabled=false;b.onclick=()=>location.reload();
+  }
+  el.style.display="flex";
 }
 function mailItems(){
   const info=ZXS.info;if(!info)return[];
   const items=[];
   if(verCmp(ZXCFG.version,info.latest)<0)items.push({id:"update-"+info.latest,title:"มีเวอร์ชันใหม่ "+info.latest,date:"",
-    body:"คุณใช้เวอร์ชัน "+ZXCFG.version+(window.__outdated?"\nต้องอัปเดตก่อนเล่นออนไลน์":"")+(info.downloadUrl?"":"\n(ยังไม่มีลิงก์ดาวน์โหลด)"),url:info.downloadUrl||""});
+    body:"คุณใช้เวอร์ชัน "+ZXCFG.version+(window.__outdated?"\nต้องอัปเดตก่อนเล่นออนไลน์":"")+(info.downloadUrl?"":"\n(ยังไม่มีลิงก์ดาวน์โหลด)"),url:info.downloadUrl||"",btn:"ดาวน์โหลดอัปเดต"});
   return items.concat(info.mail||[]);
 }
 const unreadIds=()=>{const read=lsGet("zx.read")||[];return mailItems().map(i=>i.id).filter(id=>!read.includes(id))};
@@ -81,6 +98,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   const cached=lsGet("zx.info");           // last known mail / version, so the mailbox works without the server too
   if(cached){ZXS.info=cached;window.__outdated=verCmp(ZXCFG.version,cached.minimum)<0}
   updateBadge();
+  checkForce();
   document.getElementById("introBy").textContent="สร้างโดย "+ZXCFG.creator;
   document.getElementById("introPlay").onclick=()=>{document.getElementById("intro").style.display="none"};
   document.getElementById("mailBtn").onclick=openMail;
