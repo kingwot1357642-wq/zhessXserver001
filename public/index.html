@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zhess X</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0f1c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<linearGradient id="gSteel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1f6ff"/><stop offset=".5" stop-color="#9fb0cc"/><stop offset="1" stop-color="#56647f"/></linearGradient>
+<linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0b0"/><stop offset=".5" stop-color="#e0aa43"/><stop offset="1" stop-color="#8a5f1d"/></linearGradient>
+<linearGradient id="gCrim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ef5a5a"/><stop offset="1" stop-color="#7a1423"/></linearGradient>
+<linearGradient id="gForest" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#58915a"/><stop offset="1" stop-color="#1f3a26"/></linearGradient>
+<linearGradient id="gRobeFire" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9a45"/><stop offset="1" stop-color="#9c1f10"/></linearGradient>
+<linearGradient id="gViolet" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8d5fcb"/><stop offset="1" stop-color="#2b1a4a"/></linearGradient>
+<linearGradient id="gLeafRobe" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe8b0"/><stop offset="1" stop-color="#3f8f52"/></linearGradient>
+<linearGradient id="gLeaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c9f2a8"/><stop offset="1" stop-color="#3f8f4c"/></linearGradient>
+<linearGradient id="fxBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe27a" stop-opacity="0"/><stop offset="1" stop-color="#fff6c8" stop-opacity=".95"/></linearGradient>
+<radialGradient id="fxFire"><stop offset="0" stop-color="#fff"/><stop offset=".25" stop-color="#ffe27a"/><stop offset=".55" stop-color="#ff8a2a"/><stop offset=".8" stop-color="#d02a12" stop-opacity=".8"/><stop offset="1" stop-color="#d02a12" stop-opacity="0"/></radialGradient>
+<radialGradient id="fxWhite"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#dfe9ff" stop-opacity=".7"/><stop offset="1" stop-color="#dfe9ff" stop-opacity="0"/></radialGradient>
+<radialGradient id="fxGreen"><stop offset="0" stop-color="#f0ffe8"/><stop offset=".45" stop-color="#7fe08a" stop-opacity=".8"/><stop offset="1" stop-color="#3fae5a" stop-opacity="0"/></radialGradient>
+<radialGradient id="fxGold"><stop offset="0" stop-color="#fffbe0"/><stop offset=".45" stop-color="#ffd25a" stop-opacity=".85"/><stop offset="1" stop-color="#e09a20" stop-opacity="0"/></radialGradient>
+<radialGradient id="fxWater"><stop offset="0" stop-color="#f0fbff"/><stop offset=".45" stop-color="#4fb0f0" stop-opacity=".8"/><stop offset="1" stop-color="#1d5a9c" stop-opacity="0"/></radialGradient>
+<radialGradient id="fxPurple"><stop offset="0" stop-color="#f5e8ff"/><stop offset=".45" stop-color="#a35be0" stop-opacity=".8"/><stop offset="1" stop-color="#5a2a9a" stop-opacity="0"/></radialGradient>
+<radialGradient id="fxSmoke"><stop offset="0" stop-color="#d7dbe8" stop-opacity=".9"/><stop offset=".6" stop-color="#8a8fa6" stop-opacity=".6"/><stop offset="1" stop-color="#6a6f86" stop-opacity="0"/></radialGradient>
+<radialGradient id="fxPoison"><stop offset="0" stop-color="#e2ffb4"/><stop offset=".5" stop-color="#7fcf3a" stop-opacity=".7"/><stop offset="1" stop-color="#4a8a1a" stop-opacity="0"/></radialGradient>
+<linearGradient id="gShadow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a4272"/><stop offset="1" stop-color="#14101f"/></linearGradient>
+</defs></svg>
+
+<div id="mainMenu">
+  <div class="logo">ZHESS X</div>
+  <button id="mailBtn" aria-label="mail">&#9993;<i id="mailDot"></i></button><i class="sdot waking" id="mmDot"></i>
+  <div class="panel">
+    <button class="mbtn battle" id="mmBattle">BATTLE</button>
+    <button class="mbtn" id="mmOffline">ออฟไลน์</button>
+    <button class="mbtn" id="mmChars">CHARACTERS</button>
+  </div>
+</div>
+<div id="intro">
+  <div class="logo">ZHESS X</div>
+  <div class="by" id="introBy"></div>
+  <div class="srv"><i class="sdot waking" id="srvDot"></i><span id="srvText"></span></div>
+  <button id="introPlay">เล่นก่อน</button>
+</div>
+<div id="mailModal"><div class="box"><button class="x" id="mailX">&#10005;</button><div class="t">MAIL</div><div class="ml" id="mailList"></div></div></div>
+<div id="battlePage">
+  <div class="bpbar"><button class="back" id="bpBack">&#8592;</button><div class="title">BATTLE</div></div>
+  <div class="grid">
+    <button class="bcard camp" id="bpCampaign">CAMPAIGN MODE</button>
+    <button class="bcard join" id="bpJoin">JOIN</button>
+    <button class="bcard cust" id="bpCustoms">CUSTOMS</button>
+    <button class="bcard ai" id="bpAI">AI MODE</button>
+    <button class="bcard arc" id="bpArcade">ARCADE MODE</button>
+  </div>
+</div>
+<div id="joinModal"><div class="box"><button class="x" id="joinX">&#10005;</button><div class="t">JOIN</div><input id="joinCode" maxlength="6" placeholder="รหัสห้อง 6 ตัว" autocomplete="off" autocapitalize="characters"><div class="err" id="joinErr"></div><div class="jrow"><button id="joinGo">JOIN</button></div></div></div>
+<div id="roomModal"><div class="box">
+  <div class="t">CUSTOMS</div>
+  <div class="rc" id="roomCodeDisplay">------</div>
+  <div class="players"><div>ผู้เล่น 1<br><b id="p1State">รอผู้เล่น</b></div><div>ผู้เล่น 2<br><b id="p2State">รอผู้เล่น</b></div></div>
+  <div class="st" id="lobbyStatus"></div>
+  <div class="jrow"><button id="readyBtn" disabled>พร้อม</button><button class="alt" id="roomCancel">ยกเลิก</button></div>
+</div></div>
+<div id="devModal"><div class="box"><div class="t" id="devTitle">CHARACTERS</div><div class="d" id="devText">กำลังพัฒนา</div><button id="devOk">ตกลง</button></div></div>
+
+<div id="rot"></div>
+<div class="frame" id="g"></div>
+<div class="setup" id="su"></div>
+<script>
+// Shows any startup/runtime error on screen (a blank page is otherwise silent on phones).
+(function(){function show(m){try{var d=document.getElementById("errbar");if(!d){d=document.createElement("div");d.id="errbar";d.style.cssText="position:fixed;left:0;right:0;top:0;z-index:99999;background:#b00020;color:#fff;font:12px/1.4 monospace;padding:6px 8px;white-space:pre-wrap;max-height:50vh;overflow:auto";(document.body||document.documentElement).appendChild(d)}d.textContent+=m+"\n"}catch(e){}}
+window.addEventListener("error",function(e){show("[v3] "+(e.message||"error")+(e.filename?" @"+e.filename.split("/").pop()+":"+e.lineno:""))});
+window.addEventListener("unhandledrejection",function(e){show("[v3] promise: "+(e.reason&&e.reason.message||e.reason))});
+})();
+</script>
+<script>if("serviceWorker"in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});</script>
+<script>window.ZHESS_SERVER="";</script>
+<script src="data/config.js"></script>
+<script src="js/zx.js"></script>
+<script src="data/units.bundle.js"></script>
+<script src="data/theme.js"></script>
+<script src="js/core.js"></script>
+<script src="js/effects.js"></script>
+<script src="js/setup.js"></script>
+<script src="js/rules.js"></script>
+<script src="js/mech/nimbora.js"></script>
+<script src="js/mech/scarecrowd.js"></script>
+<script src="js/cast.js"></script>
+<script src="js/render.js"></script>
+<script src="js/bot.js"></script>
+<script src="js/net.js"></script>
+<script src="js/meta.js"></script>
+</body>
+</html>
