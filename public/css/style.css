@@ -254,3 +254,11 @@ body[data-arena] .cell.k{background-color:var(--ac2)}
 #mailModal .mi p{margin:4px 0;color:#c9d4e8;font-size:14px;white-space:pre-wrap}
 #mailModal .mi button{margin-top:4px;padding:8px 16px;border:0;border-radius:8px;background:#35a8ff;color:#071321;font:inherit;font-weight:800;cursor:pointer}
 #mailModal .me{color:#8998b2;text-align:center;padding:14px}
+
+/* ---- forced update (blocks everything, above the intro) ---- */
+#forceUpdate{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:#05070cf2;font-family:system-ui,sans-serif;padding:16px}
+#forceUpdate .box{background:#171f30;border:1px solid #c9a96a;border-radius:14px;padding:24px 26px;text-align:center;max-width:380px;color:#eef3ff}
+#forceUpdate .t{font-size:20px;font-weight:800;margin-bottom:8px}
+#forceUpdate p{margin:0 0 16px;color:#c9d4e8;line-height:1.5}
+#forceUpdate button{width:100%;padding:12px;border:0;border-radius:10px;background:#35a8ff;color:#071321;font:inherit;font-weight:800;cursor:pointer}
+#forceUpdate button:disabled{opacity:.5;cursor:not-allowed}
