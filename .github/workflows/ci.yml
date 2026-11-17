@@ -1,0 +1,75 @@
+name: CI
+
+# Every upload is checked here before it can go live. In Render set Auto-Deploy to "After CI Checks Pass":
+# if a check fails, Render keeps running the previous (working) version.
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate files
+        run: node tools/validate.js
+
+      - name: Install test browser
+        run: |
+          npm i --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: Start the server
+        run: |
+          PORT=3000 nohup node server.js > server.log 2>&1 &
+          for i in $(seq 1 30); do curl -fsS http://localhost:3000/health && break; sleep 1; done
+          curl -fsS http://localhost:3000/health
+
+      - name: Play a bot game in a browser
+        run: node tools/smoke.js http://localhost:3000
+
+      - name: Online room test (advisory - a failure here does not block the deploy)
+        continue-on-error: true
+        run: node tools/smoke.js http://localhost:3000 --online
+
+      - name: Server log
+        if: always()
+        run: cat server.log || true
+
+  publish-notes:
+    # Writes the What's New entry (changelog.json + release/snapshot.json) after a good upload on the main branch.
+    needs: check
+    if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Publish What's New
+        continue-on-error: true
+        env:
+          HEAD_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          node tools/whatsnew.js --publish
+          if [ -n "$(git status --porcelain changelog.json release)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add changelog.json release/snapshot.json
+            git commit -m "chore: publish What's New [skip ci]"
+            git pull --rebase origin "${{ github.ref_name }}"
+            git push
+          fi
+          
