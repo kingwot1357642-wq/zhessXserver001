@@ -1,0 +1,15 @@
+HOW TO ADD A NEW UNIT
+1. Copy any file here (for example sword.js) to a new name, e.g. mynewunit.js, and edit it.
+   - The first argument of ZX.unit("id", {...}) is the unit id; it must be unique and is also the picture name: public/img/char/<id>.svg
+   - order = position in the selection list (lower comes first)
+   - rar = common | uncommon | rare | epic   (border colour follows the rarity)
+   - pop = population cost, hp, mv, el = element (colours live in data/theme.js)
+   - s = skills. Copy a skill with the same behaviour (k) from an existing unit and change the numbers/text:
+       d = damage, cd = cooldown, r = range, c = phys|magic, l = low|mid|high, i = icon name (public/img/icon/<name>.svg),
+       v = visual effect name (see js/effects.js), x = description text
+2. Done. Nothing else needs editing:
+   - the web server (server.js) reads this folder when it starts, so the new unit is allowed in rosters and sent to every player
+   - the APK build (build.yml) bundles this folder automatically
+   - if you open public/index.html without the server, run:  node tools/build-bundle.js
+Files that do not end in .js (like this one) are ignored.
+Special mechanics (new rules that no existing skill type covers) still need code in js/mech/ or js/cast.js.
