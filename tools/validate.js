@@ -60,6 +60,7 @@ if (!/^\d+\.\d+\.\d+$/.test(ver || "")) errors.push(`public/data/config.js: vers
 try {
   const info = JSON.parse(fs.readFileSync(path.join(root, "info.json"), "utf8"));
   for (const k of ["latest", "minimum"]) if (!/^\d+\.\d+\.\d+$/.test(info[k] || "")) errors.push(`info.json: ${k} ต้องเป็นรูป 1.2.3`);
+  if (info.downloadUrl && !/^https:\/\//.test(info.downloadUrl)) errors.push("info.json: downloadUrl ต้องขึ้นต้นด้วย https://");
   const ids = (info.mail || []).map(m => m.id);
   if (new Set(ids).size !== ids.length) errors.push("info.json: มีข้อความที่ id ซ้ำกัน");
   for (const m of info.mail || []) if (!m.id || !m.title) errors.push("info.json: ทุกข้อความต้องมี id และ title");
